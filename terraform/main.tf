@@ -80,21 +80,6 @@ module "cluster" {
   pod_vnet_subnet_id = module.network.snet_id
 }
 
-
-
-# resource "azurerm_role_assignment" "podid_kv_role" {
-#     scope                = module.security.keyvault_id
-#     role_definition_name = "Reader"
-#     principal_id         = module.cluster.pod_mi_principal_id
-# }
-
-# resource "azurerm_key_vault_access_policy" "podid" {
-#     key_vault_id       = module.security.keyvault_id
-#     tenant_id          = data.azurerm_client_config.current.tenant_id
-#     object_id          = module.cluster.pod_mi_principal_id
-#     secret_permissions = ["get"]
-# }
-
 # resource "azurerm_servicebus_namespace" "sbns" {
 #     name                = "${var.sbns_prefix}-${var.environment}-${random_string.unique.result}"
 #     location            = azurerm_resource_group.rg.location
