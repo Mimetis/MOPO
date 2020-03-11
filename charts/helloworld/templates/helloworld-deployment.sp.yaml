@@ -1,0 +1,43 @@
+# apiVersion: apps/v1 
+# kind: Deployment
+# metadata:
+#   name: {{ .Chart.Name }}
+#   namespace: {{ default .Release.Namespace .Values.namespace | trunc 63 | trimSuffix "-" }}
+#   labels:
+#     app: {{ .Chart.Name }}
+#     aadpodidbinding: msi
+# spec:
+#   selector:
+#     matchLabels:
+#       app: {{ .Chart.Name }}
+#   replicas: 2 
+#   template:
+#     metadata:
+#       labels:
+#         app: {{ .Chart.Name }}
+#         aadpodidbinding: msi
+#     spec:
+#       containers:
+#       - name: {{ .Chart.Name }}-app
+#         image: gcr.io/google-samples/hello-app:1.0
+#         volumeMounts:
+#         - name: test
+#           mountPath: /kvmnt
+#           readOnly: true
+#         ports:
+#         - containerPort: 8080
+#       volumes:
+#       - name: test
+#         flexVolume:
+#           driver: "azure/kv"
+#           secretRef:
+#             name: kvcreds
+#           options:
+#             usepodidentity: "false"         # [OPTIONAL] if not provided, will default to "false"
+#             keyvaultname: {{ .Values.keyVault.name }}               # the name of the KeyVault
+#             keyvaultobjectnames: "MySecret"        # list of KeyVault object names (semi-colon separated)
+#             keyvaultobjecttypes: secret    # list of KeyVault object types: secret, key or cert (semi-colon separated)
+#             # keyvaultobjectversions: ""     # [OPTIONAL] list of KeyVault object versions (semi-colon separated), will get latest if empty
+#             resourcegroup: {{ .Values.subscription.resourceGroup }}              # [REQUIRED FOR < v0.0.14] the resource group of the KeyVault
+#             subscriptionid: {{ .Values.subscription.id }}             # [REQUIRED FOR < v0.0.14] the subscription ID of the KeyVault
+#             tenantid: {{ .Values.subscription.tenantId }}                   # the tenant ID of the KeyVault

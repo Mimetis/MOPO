@@ -1,0 +1,6 @@
+
+managedIdentity:
+  id: "/subscriptions/6d854ccd-e85d-4a3e-baee-af4f95a56211/resourcegroups/rgaks2-dev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aad-pod-id-dev"
+  clientId: "83e6ef66-fb30-4254-be16-c19ef6840cd9"
+  name: "aad-pod-id-dev"
+

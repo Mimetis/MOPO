@@ -1,0 +1,18 @@
+# Default values for namespaces.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: web
+
+keyVault:
+  name: kv-dev-c0m1cn
+
+subscription:
+  id: 6d854ccd-e85d-4a3e-baee-af4f95a56211
+  resourceGroup: rgaks2-dev
+  tenantId: 72f988bf-86f1-41af-91ab-2d7cd011db47
+
+
+
+
+
